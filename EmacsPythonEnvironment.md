@@ -1,12 +1,12 @@
-PEP8 に従った Python 開発環境を Emacs / Ubuntu 上に構築するメモ
-=========================================================
+Python 向けの Emacs 環境を Ubuntu 上に構築するメモ
+=============================================
 
 はじめに
 -------
 
  - Python 開発環境を全く整備していない状態から、Emacs ベースの開発環境を整えるまでのメモです。
  - OS は Ubuntu を前提としています。
- - 最終的に flymake で PEP8 のコードチェックが自動的に行える状態を目指します。
+ - 最終的に flymake と PEP8 のコードチェックが自動的に行える状態を目指します。
 
 
 Python の基礎的な環境を構築する
@@ -83,11 +83,13 @@ emacs for python (http://gabrielelanaro.github.com/emacs-for-python/) をイン�
 
 以上で Python 向けの Emacs 環境は構築完了です。
 
+
 おまけ
 ------
 
 上記の手順を `EmacsPythonEnvironment.sh` としてシェルスクリプトにまとめました。
 ご利用は各自の責任のもと、ご自由に。
+
 
 参考 URL
 --------
