@@ -14,20 +14,22 @@ curl -L https://github.com/downloads/gabrielelanaro/emacs-for-python/emacs-for-p
 cat <<EOF>> ~/.emacs.d/init.el
 (load-file "~/.emacs.d/vendor/emacs-for-python-0.3/epy-init.el")
 
-(require 'flymake)
+(when (load "flymake" t)
+ (defun flymake-pylint-init ()
+   (let* ((temp-file (flymake-init-create-temp-buffer-copy
+                      'flymake-create-temp-inplace))
+          (local-file (file-relative-name
+                       temp-file
+                       (file-name-directory buffer-file-name))))
+         (list "pep8" (list "--repeat" local-file))))
 
-(defun flymake-pep8-init ()
-  (let* ((temp-file (flymake-init-create-temp-buffer-copy
-                     'flymake-create-temp-inplace))
-         (local-file (file-relative-name
-                      temp-file
-                      (file-name-directory buffer-file-name))))
-    (list "pep8" (list local-file)))) 
+ (add-to-list 'flymake-allowed-file-name-masks
+              '("\\.py\\'" flymake-pylint-init)))
 
-(add-to-list 'flymake-allowed-file-name-masks
-             '("\\.py\\'" flymake-pep8-init))
+(defun my-flymake-show-help ()
+  (when (get-char-property (point) 'flymake-overlay)
+    (let ((help (get-char-property (point) 'help-echo)))
+      (if help (message "%s" help)))))
 
-(add-hook 'python-mode-hook                   
-          '(lambda ()
-             (flymake-mode t)))
+(add-hook 'post-command-hook 'my-flymake-show-help)
 EOF

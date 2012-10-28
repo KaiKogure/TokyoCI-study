@@ -63,22 +63,24 @@ emacs for python (http://gabrielelanaro.github.com/emacs-for-python/) をイン�
  3. 引き続いて pep8 の flymake 設定を追記する
 
     ```lisp
-    (require 'flymake)
-
-    (defun flymake-pep8-init ()
-      (let* ((temp-file (flymake-init-create-temp-buffer-copy
-                         'flymake-create-temp-inplace))
-             (local-file (file-relative-name
-                          temp-file
-                          (file-name-directory buffer-file-name))))
-        (list "pep8" (list local-file)))) 
-
-    (add-to-list 'flymake-allowed-file-name-masks
-                 '("\\.py\\'" flymake-pep8-init))
-
-    (add-hook 'python-mode-hook                   
-              '(lambda ()
-                 (flymake-mode t)))
+    (when (load "flymake" t)
+     (defun flymake-pylint-init ()
+       (let* ((temp-file (flymake-init-create-temp-buffer-copy
+                          'flymake-create-temp-inplace))
+              (local-file (file-relative-name
+                           temp-file
+                           (file-name-directory buffer-file-name))))
+             (list "pep8" (list "--repeat" local-file))))
+    
+     (add-to-list 'flymake-allowed-file-name-masks
+                  '("\\.py\\'" flymake-pylint-init)))
+    
+    (defun my-flymake-show-help ()
+      (when (get-char-property (point) 'flymake-overlay)
+        (let ((help (get-char-property (point) 'help-echo)))
+          (if help (message "%s" help)))))
+    
+    (add-hook 'post-command-hook 'my-flymake-show-help)
     ```
 
 以上で Python 向けの Emacs 環境は構築完了です。
