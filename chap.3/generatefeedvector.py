@@ -21,7 +21,7 @@ def getwordcounts(url):
             wc.setdefault(word, 0)
             wc[word] += 1
 
-            return d.feed.title, wc
+    return d.feed.title, wc
 
 
 def getwords(html):
@@ -43,12 +43,15 @@ for feedurl in feedlist:
             apcount.setdefault(word, 0)
             if count > 1:
                 apcount[word] += 1
+
+        print 'Succeed: %s' % feedurl
+
     except:
         print 'Failed to parse feeed %s' % feedurl
 
 wordlist = []
 
-for w, bc in apcount.item():
+for w, bc in apcount.items():
     frac = float(bc) / len(feedlist)
     if frac > 0.1 and frac < 0.5:
         wordlist.append(w)
