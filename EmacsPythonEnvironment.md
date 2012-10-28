@@ -96,4 +96,4 @@ emacs for python (http://gabrielelanaro.github.com/emacs-for-python/) をイン�
 参考 URL
 --------
 
- - http://d.hatena.ne.jp/se-kichi/20100324/
+ - http://www.yilmazhuseyin.com/blog/dev/add-pep8-style-check-emacs/
