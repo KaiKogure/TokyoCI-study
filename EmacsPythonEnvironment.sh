@@ -24,7 +24,7 @@ cat <<EOF>> ~/.emacs.d/init.el
          (list "pep8" (list "--repeat" local-file))))
 
  (add-to-list 'flymake-allowed-file-name-masks
-              '("\\.py\\'" flymake-pylint-init)))
+              '("\\\\.py\\\\'" flymake-pylint-init)))
 
 (defun my-flymake-show-help ()
   (when (get-char-property (point) 'flymake-overlay)
