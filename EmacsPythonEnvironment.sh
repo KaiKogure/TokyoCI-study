@@ -3,7 +3,7 @@
 sudo aptitude -y install python-setuptools
 sudo easy_install pip
 sudo pip install pep8
-sudo pip install pyfrakes
+sudo pip install pyflakes
 
 cd ~/.emacs.d/
 mkdir vendor
