@@ -44,8 +44,15 @@ def plotagematches(rows):
                [r.data[1] for r in rows if r.match == 1]
     xdn, ydn = [r.data[0] for r in rows if r.match == 0],\
                [r.data[1] for r in rows if r.match == 0]
+    avgs = lineartrain(rows)
+    xavg0 = avgs[0][0]
+    yavg0 = avgs[0][1]
+    xavg1 = avgs[1][0]
+    yavg1 = avgs[1][1]
     plot(xdm, ydm, 'go')
     plot(xdn, ydn, 'r+')
+    plot(xavg0, yavg0, 'r*')
+    plot(xavg1, yavg1, 'g*')
     show()
 
 
